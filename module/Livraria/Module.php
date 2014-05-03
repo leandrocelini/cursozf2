@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Zend Framework (http://framework.zend.com/)
  *
@@ -7,27 +8,19 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
-namespace Application;
+namespace Livraria;
 
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
+use Livraria\Model\CategoriaTable;
 
-class Module
-{
-    public function onBootstrap(MvcEvent $e)
-    {
-        $eventManager        = $e->getApplication()->getEventManager();
-        $moduleRouteListener = new ModuleRouteListener();
-        $moduleRouteListener->attach($eventManager);
-    }
+class Module {
 
-    public function getConfig()
-    {
+    public function getConfig() {
         return include __DIR__ . '/config/module.config.php';
     }
 
-    public function getAutoloaderConfig()
-    {
+    public function getAutoloaderConfig() {
         return array(
             'Zend\Loader\StandardAutoloader' => array(
                 'namespaces' => array(
@@ -36,4 +29,18 @@ class Module
             ),
         );
     }
+
+    public function getServiceConfig() {
+        return array(
+            'factories' => array(
+                'Livraria\Model\CategoriaService' => function($service) {
+            $dbAdapter = $service->get('Zend\Db\Adapter\Adapter');
+            $categoriaTable = new CategoriaTable($dbAdapter);
+            $categoriaService = new Model\CategoriaService($categoriaTable);
+            return $categoriaService;
+        }
+            )
+        );
+    }
+
 }
