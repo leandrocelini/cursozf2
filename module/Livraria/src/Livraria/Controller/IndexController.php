@@ -10,6 +10,7 @@ class IndexController extends AbstractActionController
 {
     public function indexAction()
     {
+        echo "foi";
         $em = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
         $repo = $em->getRepository('Livraria\Entity\Categoria');
         
