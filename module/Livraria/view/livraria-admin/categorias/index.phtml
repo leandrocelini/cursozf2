@@ -1,25 +1,33 @@
-<table>
+<table border="1">
     <tr>
         <td>ID</td>
         <td>NOME</td>
         <td>AÇÃO</td>
     </tr>
-</table>
 
-<?php foreach ($this->data as $entity) {
-    ?> 
-    <tr>
-        <td><?php echo $entity->getId() ?></td>
-        <td><?php echo $entity->getNome() ?></td>
-    </tr> 
+
+    <?php foreach ($this->data as $entity) {
+        ?> 
+        <tr>
+            <td><?php echo $entity->getId() ?></td>
+            <td><?php echo $entity->getNome() ?></td>
+            <td><a href="<?php echo $this->url('livraria-admin-interna', array('controller' => 'categorias', 'action' => 'edit', 'id' => $entity->getId()))?>"</a>Editar</td>
+            <td><a href="<?php echo $this->url('livraria-admin-interna', array('controller' => 'categorias', 'action' => 'delete', 'id' => $entity->getId()))?>"</a>Deletar</td>
+        </tr> 
     <?php
-} 
+}
+
 ?>
-<?php echo $this->paginationControl($this->data,'Sliding','paginator'); 
+        
+</table>
+<?php echo $this->paginationControl($this->data, 'Sliding', 'paginator');?>
+<a href="<?php echo $this->url('livraria-admin',array('controller'=> 'categorias', 'action' => 'new'))?>">NOVO</a>
 
 
 
-    
+
+
+
 
 
 

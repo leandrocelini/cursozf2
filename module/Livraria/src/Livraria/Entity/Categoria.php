@@ -13,6 +13,11 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 
 class Categoria {
+    
+    public function __construct($options = null) {
+        Configurator::configure($this, $options);
+        
+    }
  
  /**
      * @ORM\Id

@@ -16,6 +16,16 @@ return array(
                 ),
             ),
             
+             'livraria-admin-interna' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route' => '/admin/[:controller[/:action][/:id]]',
+                    'constraints' => array(
+                        'id' => '[0-9]+'
+                    )
+                ),
+            ),
+            
              'livraria-admin' => array(
                 'type' => 'Segment',
                 'options' => array(
