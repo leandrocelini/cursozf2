@@ -1,22 +1,20 @@
 <?php
 
-namespace Livraria\Entity;
-
+namespace Application\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="categorias")
- * @ORM\Entity(repositoryClass="Livraria\Entity\CategoriaRepository")
+ * @ORM\Table(name="aplicacoes")
+ * @ORM\Entity(repositoryClass="Application\Entity\AplicacaoRepository")
  */
-class Categoria {
+class Aplicacao {
 
     public function __construct($options = null) {
-        Configurator::configure($this,$options);
-        $this->livros = new ArrayCollection();
+        Configurator::configure($this, $options);
     }
-    
+
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
@@ -24,18 +22,19 @@ class Categoria {
      * @var int
      */
     protected $id;
-    
+
     /**
      * @ORM\Column(type="text")
      * @var string
      */
     protected $nome;
-    
+
     /**
-     * @ORM\OneToMany(targetEntity="Livraria\Entity\Livro", mappedBy="categoria")
+     * @ORM\Column(type="text")
+     * @var string
      */
-    protected $livros;
-    
+    protected $tipo;
+
     public function getId() {
         return $this->id;
     }
@@ -48,19 +47,24 @@ class Categoria {
         return $this->nome;
     }
 
+    public function getTipo() {
+        return $this->tipo;
+    }
+
     public function setNome($nome) {
         $this->nome = $nome;
+    }
+
+    public function setTipo($tipo) {
+        $this->tipo = $tipo;
     }
 
     public function __toString() {
         return $this->nome;
     }
-    
-    public function getLivros() {
-        return $this->livros;
-    }
-    
+
     public function toArray() {
-        return array('id'=>$this->getId(),'nome'=>$this->getNome());
+        return array('id' => $this->getId(), 'nome' => $this->getNome(), 'tipo' => $this->getTipo());
     }
+
 }

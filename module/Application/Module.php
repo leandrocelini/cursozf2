@@ -1,16 +1,9 @@
 <?php
-/**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/ZendSkeletonApplication for the canonical source repository
- * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
- */
-
 namespace Application;
 
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
+use Application\Service\Aplicacao as AplicacaoService;
 
 class Module
 {
@@ -31,9 +24,22 @@ class Module
         return array(
             'Zend\Loader\StandardAutoloader' => array(
                 'namespaces' => array(
-                    __NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__,
+                    __NAMESPACE__.'Admin' => __DIR__ . '/src/' . __NAMESPACE__.'Admin',
+                    __NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__
                 ),
             ),
         );
+    }
+    
+    public function getServiceConfig(){
+         
+        return array (
+            'factories'=> array(
+                'Application\Service\Aplicacao' => function ($service){
+                    return new AplicacaoService($service->get('Doctrine\ORM\EntityManager'));
+                }
+            )
+        );
+        
     }
 }

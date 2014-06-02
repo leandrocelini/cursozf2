@@ -1,0 +1,14 @@
+<h3>Nova aplicacao</h3>
+
+<br />
+
+<?php
+$form = $this->form;
+$form->setAttribute('action', $this->url('aplication-admin',array('controller'=>'aplicacao','action'=>'insert')));
+$form->prepare();
+echo $this->form()->openTag($form);
+echo $this->formHidden($form->get('id'));
+echo $this->formRow($form->get('nome'));
+echo $this->formRow($form->get('tipo'));
+echo $this->formSubmit($form->get('submit'));
+echo $this->form()->closeTag();

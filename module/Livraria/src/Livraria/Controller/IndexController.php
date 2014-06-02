@@ -10,11 +10,11 @@ class IndexController extends AbstractActionController
 {
     public function indexAction()
     {
-        echo "foi";
+       
         $em = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
         $repo = $em->getRepository('Livraria\Entity\Categoria');
         
-        $categoria = $repo->findAll();
+        $categorias = $repo->findAll();
         
         /* Zend DB
         $categoriaService = $this->getServiceLocator()->get("Livraria\Model\CategoriaService");
@@ -22,7 +22,7 @@ class IndexController extends AbstractActionController
          * 
          */
         
-         return new ViewModel(array('categoria' => $categoria));
+         return new ViewModel(array('categorias' => $categorias));
         
     }
 }

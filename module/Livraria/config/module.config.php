@@ -11,12 +11,11 @@ return array(
                     'route' => '/livraria',
                     'defaults' => array(
                         'controller' => 'Livraria\Controller\Index',
-                        'action' => 'index'
+                        'action' => 'index',
                     ),
                 ),
             ),
-            
-             'livraria-admin-interna' => array(
+            'livraria-admin-interna' => array(
                 'type' => 'Segment',
                 'options' => array(
                     'route' => '/admin/[:controller[/:action][/:id]]',
@@ -25,26 +24,52 @@ return array(
                     )
                 ),
             ),
-            
-             'livraria-admin' => array(
+            'livraria-admin' => array(
                 'type' => 'Segment',
                 'options' => array(
                     'route' => '/admin/[:controller[/:action][/page/:page]]',
                     'defaults' => array(
                         'action' => 'index',
-                        'page' => '1'
+                        'page' => 1
                     ),
                 ),
             ),
-    
+            'livraria-admin-auth' => array(
+                'type' => 'Literal',
+                'options' => array(
+                    'route' => '/admin/auth',
+                    'defaults' => array(
+                        'action' => 'index',
+                        'controller' =>'livraria-admin/auth'
+                    ),
+                ),
+            ),
+            
+             'livraria-admin-logout' => array(
+                'type' => 'Literal',
+                'options' => array(
+                    'route' => '/admin/auth/logout',
+                    'defaults' => array(
+                        'action' => 'logout',
+                        'controller' =>'livraria-admin/auth'
+                    ),
+                ),
+            ),
         ),
     ),
     'controllers' => array(
         'invokables' => array(
             'Livraria\Controller\Index' => 'Livraria\Controller\IndexController',
             'categorias' => 'LivrariaAdmin\Controller\CategoriasController',
-            
+            'livros' => 'LivrariaAdmin\Controller\LivrosController',
+            'users' => 'LivrariaAdmin\Controller\UsersController',
+            'livraria-admin/auth' => 'LivrariaAdmin\Controller\AuthController',
         ),
+    ),
+    
+    'module_layouts' => array(
+      'Livraria' => 'layout/layout',
+      'LivrariaAdmin' => 'layout/layout-admin'
     ),
     
     'view_manager' => array(
@@ -63,8 +88,6 @@ return array(
             __DIR__ . '/../view',
         ),
     ),
-  
-    
     'doctrine' => array(
         'driver' => array(
             __NAMESPACE__ . '_driver' => array(

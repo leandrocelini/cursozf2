@@ -1,9 +1,7 @@
 <?php
-
 namespace Livraria\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
-
 
 /**
  * @ORM\Entity
@@ -11,15 +9,14 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @ORM\Entity(repositoryClass="Livraria\Entity\CategoriaRepository")
  */
 
-
 class Categoria {
     
     public function __construct($options = null) {
         Configurator::configure($this, $options);
-        
+        $this->livros = new ArrayCollection();
     }
  
- /**
+    /**
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue
@@ -33,6 +30,15 @@ class Categoria {
      */
     protected $nome;
     
+    /**
+     *@ORM\OneToMany(targetEntity="Livraria\Entity\Livro", mappedBy="categoria")
+     */
+    protected $livros;
+    
+    public function getLivros(){
+        return $this->livros;
+    }
+
     public function getId() {
         return $this->id;
     }

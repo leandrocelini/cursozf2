@@ -1,0 +1,40 @@
+<table border="1">
+    <tr>
+        <td>ID</td>
+        <td>NOME</td>
+        <td>EMAIL</td>
+        <td>AÇÃO</td>
+    </tr>
+
+
+    <?php foreach ($this->data as $entity) {
+        ?> 
+        <tr>
+            <td><?php echo $entity->getId() ?></td>
+            <td><?php echo $entity->getNome() ?></td>
+              <td><?php echo $entity->getEmail() ?></td>
+            <td><a href="<?php echo $this->url('livraria-admin-interna', array('controller' => 'users', 'action' => 'edit', 'id' => $entity->getId()))?>"</a>Editar</td>
+            <td><a href="<?php echo $this->url('livraria-admin-interna', array('controller' => 'users', 'action' => 'delete', 'id' => $entity->getId()))?>"</a>Deletar</td>
+        </tr> 
+    <?php
+}
+
+?>
+        
+</table>
+<?php echo $this->paginationControl($this->data, 'Sliding', 'paginator');?>
+<a href="<?php echo $this->url('livraria-admin',array('controller'=> 'users', 'action' => 'new'))?>">NOVO</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

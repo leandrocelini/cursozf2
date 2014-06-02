@@ -4,7 +4,7 @@ namespace LivrariaAdmin\Form;
 
 use Zend\InputFilter\InputFilter;
 
-class CategoriaFilter extends InputFilter{
+class CategoriaFilter extends InputFilter {
 
     public function __construct() {
         $this->add(array(
@@ -18,7 +18,7 @@ class CategoriaFilter extends InputFilter{
                 array(
                     'name' => 'NotEmpty',
                     'options' => array(
-                        'messages' => array('isEmpty'=>'Nome não pode estar em branco'),
+                        'messages' => array('isEmpty' => 'Nome não pode estar em branco'),
                     )
                 )
         )));

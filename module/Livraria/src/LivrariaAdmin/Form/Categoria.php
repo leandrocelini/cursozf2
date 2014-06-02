@@ -23,7 +23,7 @@ class Categoria extends Form {
         $this->add(array(
             'name' => 'nome',
             'options' => array(
-                'type' => 'hidden',
+                'type' => 'text',
                 'label' => 'Nome'
             ),
             'attributes' => array(
